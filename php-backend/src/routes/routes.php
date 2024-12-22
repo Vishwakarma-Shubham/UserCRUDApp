@@ -1,14 +1,13 @@
 <?php
 
-class Routes {
+require_once $globals['controllers'].'/UserController.php';
 
-    private $routes = [
-        ['method' => 'GET', 'pattern' => '^api/users$', 'handler' => ['UserController', 'index']],
-        ['method' => 'GET', 'pattern' => '^api/users/(\d+)$', 'handler' => ['UserController', 'show']],
-        ['method' => 'POST', 'pattern' => '^api/users$', 'handler' => ['UserController', 'store']],
-        ['method' => 'PUT', 'pattern' => '^api/users/(\d+)$', 'handler' => ['UserController', 'update']],
-        ['method' => '`DELETE`', 'pattern' => '^api/users/(\d+)$', 'handler' => ['UserController', 'destroy']],
-    ];
+$UserController = new UserController();
 
-
-}
+$routes = [
+    ['method' => 'GET', 'pattern' => '/^users$/', 'handler' => [$UserController, 'getUsers']],
+    ['method' => 'GET', 'pattern' => '/^users\/(\d+)$/', 'handler' => [$UserController, 'getUser']],
+    ['method' => 'POST', 'pattern' => '/^users$/', 'handler' => [$UserController, 'addUser']],
+    ['method' => 'POST', 'pattern' => '/^users\/(\d+)$/', 'handler' => [$UserController, 'updateUser']],
+    ['method' => 'DELETE', 'pattern' => '/^users\/(\d+)$/', 'handler' => [$UserController, 'deleteUser']],
+];

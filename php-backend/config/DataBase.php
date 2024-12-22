@@ -20,12 +20,15 @@ class DataBase {
     private $MandatoryFields = ['host', 'port', 'dbname', 'charset'];
 
     public function __construct($config, $username = 'root' , $password = ''){
+
+        global $DEBUG;
         
         foreach($this->MandatoryFields as $field){
             if(!isset($config[$field])){
                 $this->error = $this->error_messages[0] .' : '.$field;
                 return;
             }
+            $config[$field] = sanitize_string($config[$field]); 
         }
         
         try {
@@ -33,18 +36,19 @@ class DataBase {
             $dsn = "mysql:".http_build_query($config, '', ';');
 
             $this->conn = new PDO($dsn, $username, $password, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Throw exceptions as error reporting mode
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]);
 
         } catch(PDOException $e) {
 
-            $this->error = DEBUG ? $e->getMessage() : $this->error_messages[1];
+            $this->error = $DEBUG ? $e->getMessage() : $this->error_messages[1];
+            return;
             
         } catch (Exception $e) {
-        
-            $this->error = DEBUG ? $e->getMessage() : $this->error_messages[2];
-            
+
+            $this->error = $DEBUG ? $e->getMessage() : $this->error_messages[2];
+            return;
         }
 
         if(!isset($this->conn)){
@@ -60,7 +64,7 @@ class DataBase {
         if(!empty($params) && is_array($params)){
             
             foreach($params as $key => $val){
-                $stmt->bindValue($key,$val); 
+                $stmt->bindValue($key,$val, (is_int($val) ? PDO::PARAM_INT : PDO::PARAM_STR)); 
             }
         }
     
@@ -75,6 +79,14 @@ class DataBase {
     
     function fetch_assoc($res){
         return $res->fetch();
+    }
+
+    function fetch_assoc_all($res){
+        return $res->fetchAll();
+    }
+
+    function get_last_inserted_id(){
+        return $this->conn->lastInsertId();
     }
 
 }

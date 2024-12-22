@@ -8,10 +8,9 @@ header("Access-Control-Allow-Origin: *");
 // some error handling
 ////////////////////////
 
-// const DEBUG = (isset($_GET['debug']) && $_GET['debug'] == 1) ? true : false;
-const DEBUG = true;
+$DEBUG = (array_key_exists('debug', $_GET) && $_GET['debug'] == 1) ? true : false;
 
-if(DEBUG){
+if($DEBUG){
     // get the last encountered error
     register_shutdown_function( function ($err) {
         print_r($err);
@@ -20,8 +19,7 @@ if(DEBUG){
 
 // Hide errors form the endusers
 error_reporting(E_ALL);
-ini_set('display_errors', DEBUG ? 'On' : 'Off');
-
+ini_set('display_errors', $DEBUG ? 'On' : 'Off');
 
 if(!defined("UserCRUDApp")){
     define("UserCRUDApp",1);
@@ -30,25 +28,21 @@ if(!defined("UserCRUDApp")){
 // Some global variables 
 $errors = [];
 
-
 // get the app globals and required files
 require_once '../src/globals.php';
 require_once $globals['uitls'].'/commonutils.php';
 require_once $globals['config'].'/config.php';
 require_once $globals['config'].'/database.php';
 
-r_print($config);
-
+// Get The DB object 
 $db = new DataBase($config['database'], $config['db_user'], $config['db_password']);
 
 if(!empty($db->error)){
-    $errors[] = $db->error;
+    API_Response("Eroor in DB", [], $db->error, false, 500);
 }
 
-// require_once $globals['uitls'].'/commonutils.php';
+require_once $globals['core'].'/Router.php';
 
-if(!empty($errors)){
-    die(r_print($errors));
-}
+
 
 

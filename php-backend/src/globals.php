@@ -9,6 +9,8 @@ $globals['controllers'] = $globals['path'].'/controllers';
 $globals['models'] = $globals['path'].'/models';
 $globals['uitls'] = $globals['path'].'/utils';
 $globals['globals'] = $globals['path'].'/globals';
+$globals['core'] = $globals['path'].'/core';
+$globals['routes'] = $globals['path'].'/routes';
 
 
 

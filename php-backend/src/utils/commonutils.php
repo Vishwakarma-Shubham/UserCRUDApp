@@ -11,7 +11,7 @@ function r_print($data){
 }
 
 function sanitize_string($sting){
-    return addslashes(stripslashes($sting));
+    return addslashes($sting);
 }
 
 ///////////////////////
@@ -31,7 +31,7 @@ function POST($key, $error = "", $default = ''){
     
     global $errors;
 
-    if((!isset($_POST[$key]) || empty($_POST[$key]))){
+    if((!isset($_POST[$key]) || empty($_POST[$key]))){ 
         if(!empty($default)) return $default;
         $errors[] = $error;
         return false;
@@ -40,8 +40,21 @@ function POST($key, $error = "", $default = ''){
     return sanitize_string(trim($_POST[$key]));
 }
 
-function API_Response($data, $code = 200){
+function API_Response($messsage, $data, $errors = [], $success = true, $code = 200){
 
+    header('Content-Type: application/json');
     http_response_code($code);
-    die(json_encode($data));
+
+    $response = [
+        'success' => $success,
+        'messsage' => $messsage,
+        'errors' => $errors,
+    ];
+
+    if(!$success) {
+        die(json_encode(value: $response));
+    }
+    
+    $response['data'] = $data;
+    die(json_encode(value: $response));
 }
