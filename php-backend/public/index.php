@@ -32,7 +32,7 @@ $errors = [];
 require_once '../src/globals.php';
 require_once $globals['uitls'].'/commonutils.php';
 require_once $globals['config'].'/config.php';
-require_once $globals['config'].'/database.php';
+require_once $globals['config'].'/DataBase.php';
 
 // Get The DB object 
 $db = new DataBase($config['database'], $config['db_user'], $config['db_password']);
