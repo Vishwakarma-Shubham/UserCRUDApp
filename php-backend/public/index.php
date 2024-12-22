@@ -1,7 +1,9 @@
 <?php
 
-// Allow from any origin
-header("Access-Control-Allow-Origin: *");
+// Allow CORS headers
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, PUT, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 
 ////////////////////////
