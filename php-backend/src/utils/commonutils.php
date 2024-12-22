@@ -14,19 +14,6 @@ function sanitize_string($sting){
     return addslashes($sting);
 }
 
-///////////////////////
-// Get & Post
-//////////////////////
-
-function GET($key, $default = ''){
-
-    if(!isset($_GET[$key]) || empty($_GET[$key])) {
-        return $default;
-    }
-
-    return sanitize_string(trim($_GET[$key]));
-}
-
 function POST($key, $error = "", $default = ''){
     
     global $errors;

@@ -10,8 +10,8 @@ class UserController {
         'err_get_users' => 'Error in getting user List',
         'err_get_user' => 'Error in getting user details',
         'user_created' => 'User Created Successfully',
-        'user_updated' => 'user_updated_successfully',
-        'user_deleted' => 'User deleted Successfully',
+        'user_updated' => 'User Updated Successfully',
+        'user_deleted' => 'User Deleted Successfully',
         'err_user_delete' => 'Failed to delete the user',
         'err_user_update' => 'Failed to update the user',
         'mandatory_fields_missing' => 'User Mandatory fields Missing', 
@@ -34,7 +34,8 @@ class UserController {
         6 => 'Invalid Dob Provided',
         7 => 'Date of birth cannot be in the future.',
         8 => 'Age must be above 18',
-        9 => 'User with given email ID already exsits'
+        9 => 'User with given email ID already exsits',
+        10 => 'Password must be at least 8 characters'
     ];
 
     public function __construct() {
@@ -161,7 +162,6 @@ class UserController {
 
         $update_user['name'] = POST('name', $this->messages['no_name'], $userById['name']);
         $update_user['email'] = POST('email', $this->messages['no_emial'], $userById['email']);
-        $update_user['password'] = POST('password', $this->messages['no_pass'], $userById['password']);
         $update_user['dob'] = POST('dob', $this->messages['no_dob'], $userById['dob']);
 
 
@@ -202,7 +202,14 @@ class UserController {
 
         $update_user['name'] = preg_replace('/\s+/', ' ', $update_user['name']);
 
-        if(array_key_exists('password', $_POST)){
+        $update_user['password'] = '';
+        if(array_key_exists('password', $_POST) && !empty($_POST['password'])){
+            $update_user['password'] = POST('password');
+
+            if(strlen($update_user['password']) < 8){
+                API_Response($this->messages['err_user_details'],[], $this->error_messages[10], false);
+            }
+            
             $update_user['password'] = password_hash($update_user['password'], PASSWORD_BCRYPT);
         }
 

@@ -60,15 +60,24 @@ class User {
     * Update an existing user.
     */
     public function updateUser($id, $user_data)    {
-        $query = "UPDATE {$this->table} SET `name` = :name, `email` = :email, `password` = :password, `dob` = :dob WHERE `id` = :id";
+        $query = "UPDATE {$this->table} SET `name` = :name, `email` = :email, `dob` = :dob WHERE `id` = :id";
         
         $this->db->querry($query , [
             ':id' => $id,
             ':name' => $user_data['name'],
             ':email' => $user_data['email'],
-            ':password' => $user_data['password'],
             ':dob' => $user_data['dob']
         ]);
+
+        // Update the password at last
+        if(!empty($user_data['password'])){
+            $query = "UPDATE {$this->table} SET `password` = :password WHERE `id` = :id";
+            $this->db->querry($query, [
+                ':id' => $id,
+                ':password' => $user_data['password']
+            ]);
+        }
+
     }
 
     /**
