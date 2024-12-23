@@ -33,9 +33,9 @@ class User {
     /**
     * Fetch a single user by email.
     */
-    public function getUserByEmail($email) {
-        $query = "SELECT * FROM {$this->table} WHERE email = :email";
-        $res = $this->db->querry($query , [':email' => $email]);
+    public function getUserByEmail($email, $id) {
+        $query = "SELECT * FROM {$this->table} WHERE email = :email AND id != :id";
+        $res = $this->db->querry($query , [':email' => $email, ':id' => $id]);
         return $this->db->fetch_assoc($res);
     }
 
