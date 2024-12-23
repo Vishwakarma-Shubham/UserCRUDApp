@@ -123,7 +123,6 @@ class UserController {
 
         $userByEmail = $this->user->getUserByEmail($new_user['email']);
 
-
         if(!empty($userByEmail)){
             API_Response($this->messages['err_user_exsits'],[], $this->error_messages[9], false);
         }
@@ -198,6 +197,12 @@ class UserController {
 
         if(!empty($errors)){
             API_Response($this->messages['err_user_details'],[], $errors, false);
+        }
+
+        $userByEmail = $this->user->getUserByEmail($update_user['email']);
+
+        if(!empty($userByEmail)){
+            API_Response($this->messages['err_user_exsits'],[], $this->error_messages[9], false);
         }
 
         $update_user['name'] = preg_replace('/\s+/', ' ', $update_user['name']);
