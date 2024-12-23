@@ -130,6 +130,10 @@ class UserController {
         $new_user['name'] = preg_replace('/\s+/', ' ', $new_user['name']);
         $new_user['password'] = password_hash($new_user['password'], PASSWORD_BCRYPT);
 
+        if(strlen($update_user['password']) < 8){
+            API_Response($this->messages['err_user_details'],[], $this->error_messages[10], false);
+        }
+
         $insertedID = $this->user->addUser($new_user);id: 
         $userById = $this->user->getUserById($insertedID);
         
