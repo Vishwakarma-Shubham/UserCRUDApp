@@ -121,7 +121,7 @@ class UserController {
             API_Response($this->messages['err_user_details'],[], $errors, false);
         }
 
-        $userByEmail = $this->user->getUserByEmail($new_user['email']);
+        $userByEmail = $this->user->getUserByEmail($new_user['email'], 0);
 
         if(!empty($userByEmail)){
             API_Response($this->messages['err_user_exsits'],[], $this->error_messages[9], false);
@@ -203,7 +203,7 @@ class UserController {
             API_Response($this->messages['err_user_details'],[], $errors, false);
         }
 
-        $userByEmail = $this->user->getUserByEmail($update_user['email']);
+        $userByEmail = $this->user->getUserByEmail($update_user['email'], $id);
 
         if(!empty($userByEmail)){
             API_Response($this->messages['err_user_exsits'],[], $this->error_messages[9], false);
