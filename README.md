@@ -124,7 +124,7 @@ systemctl enable nginx --now
 mysql -u root -p < /var/www/html/UserCRUDApp/php-backend/config/Import.sql
 ```
 
-7. Change the localhost with your react-app ip in the CORS header in php-backend/index.php
+7. Change the localhost with your react-app ip in the CORS header in php-backend/public/index.php
 
 8. Change the 'db_password' value with the Mariadb Password {Set during the mysql_secure_installation} in the php-backend/config/config.php
 
