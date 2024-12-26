@@ -10,7 +10,7 @@ function AddUser() {
 			const response = await fetch('http://localhost/users', {
 				method: 'POST',
 				headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Type': 'application/json',
 				},
 				body: new URLSearchParams(formData).toString(),
 			});
