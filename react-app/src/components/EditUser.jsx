@@ -52,7 +52,7 @@ function EditUser() {
             const response = await fetch(`http://localhost/users/${id}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    ''Content-Type': 'application/x-www-form-urlencoded'',
                 },
                 body: new URLSearchParams(formData).toString(),
             });

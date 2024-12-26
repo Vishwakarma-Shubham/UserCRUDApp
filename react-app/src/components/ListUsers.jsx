@@ -35,7 +35,7 @@ function ListUsers() {
                 fetch(`http://localhost/users/${userId}`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json',
+                        ''Content-Type': 'application/x-www-form-urlencoded'',
                     },
                 })
                 .then(response => response.json())
