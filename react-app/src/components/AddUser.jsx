@@ -10,9 +10,10 @@ function AddUser() {
 			const response = await fetch('http://192.168.0.12:8080/users', {
 				method: 'POST',
 				headers: {
-				''Content-Type': 'application/x-www-form-urlencoded'',
+					'Accept': 'application/json',
+      				'Content-Type': 'application/json'
 				},
-				body: new URLSearchParams(formData).toString(),
+				body: JSON.stringify(formData),
 			});
 
 			const data = await response.json();

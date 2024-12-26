@@ -12,9 +12,9 @@ function ListUsers() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-            setUsers(data.data);
+                setUsers(data.data);
             } else {
-            console.error('Failed to fetch users:', data.message);
+                console.error('Failed to fetch users:', data.message);
             }
         })
         .catch(error => console.error('Error fetching users:', error));
