@@ -8,7 +8,7 @@ function ListUsers() {
 
     // Get All the user
     useEffect(() => {
-        fetch('http://localhost/users')
+        fetch('http://192.168.0.12:8080/users')
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -32,7 +32,7 @@ function ListUsers() {
             cancelButtonText: 'No, keep it',
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost/users/${userId}`, {
+                fetch(`http://192.168.0.12:8080/users/${userId}`, {
                     method: 'DELETE',
                     headers: {
                         ''Content-Type': 'application/x-www-form-urlencoded'',
