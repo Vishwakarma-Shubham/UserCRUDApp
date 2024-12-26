@@ -35,7 +35,7 @@ function ListUsers() {
                 fetch(`http://192.168.0.12:8080/users/${userId}`, {
                     method: 'DELETE',
                     headers: {
-                        ''Content-Type': 'application/x-www-form-urlencoded'',
+                        'Content-Type': 'application/json',
                     },
                 })
                 .then(response => response.json())
