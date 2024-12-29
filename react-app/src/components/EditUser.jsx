@@ -50,7 +50,7 @@ function EditUser() {
     const onSubmit = async (formData) => {
         try {
             const response = await fetch(`http://localhost:8080/users/${id}`, {
-                method: 'POST',
+                method: 'PATCH',
                 headers: {
                     'Accept': 'application/json',
       				'Content-Type': 'application/json'
