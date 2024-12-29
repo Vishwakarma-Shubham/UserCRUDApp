@@ -7,7 +7,7 @@ function AddUser() {
 
 	const onSubmit = async (formData) => {
 		try {
-			const response = await fetch('http://192.168.0.12:8080/users', {
+			const response = await fetch('http://localhost:8080/users', {
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',

@@ -13,7 +13,7 @@ function EditUser() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch(`http://192.168.0.12:8080/users/${id}`);
+                const response = await fetch(`http://localhost:8080/users/${id}`);
                 const data = await response.json();
 
                 if (data.success && data.data) {
@@ -49,7 +49,7 @@ function EditUser() {
 
     const onSubmit = async (formData) => {
         try {
-            const response = await fetch(`http://192.168.0.12:8080/users/${id}`, {
+            const response = await fetch(`http://localhost:8080/users/${id}`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
