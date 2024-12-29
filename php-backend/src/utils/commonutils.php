@@ -26,7 +26,7 @@ function GetData($key, $error = "", $default = ''){
         return false;
     }
     
-    return sanitize_string(trim($_POST[$key]));
+    return sanitize_string(trim($_DATA[$key]));
 }
 
 function API_Response($messsage, $data, $errors = [], $success = true, $code = 200){
