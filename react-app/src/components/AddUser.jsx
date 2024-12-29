@@ -26,7 +26,7 @@ function AddUser() {
 				});
 			} else {
 				Swal.fire({
-					title: 'Error',
+					title: data.messsage,
 					text: data.errors,
 					icon: 'error',
 				});

@@ -14,11 +14,13 @@ function sanitize_string($sting){
     return addslashes($sting);
 }
 
-function GetData($key, $error = "", $default = ''){ 
+function GetData($key, $error = "", $default = ''){
     
     global $errors;
 
-    if((!isset($_POST[$key]) || empty($_POST[$key]))){ 
+    $_DATA = json_decode(file_get_contents('php://input'), true);
+
+    if((!isset($_DATA[$key]) || empty($_DATA[$key]))){ 
         if(!empty($default)) return $default;
         $errors[] = $error;
         return false;
