@@ -104,7 +104,7 @@ npm install
 3. Change API Enpoints
 ```bash
 cd /var/www/html/UserCRUDApp/react-app/src/components
-sed -i -e 's|http://localhost/users|http://localhost:8080/users|g' ./*  #Replace localhost with your private/public IP
+sed -i -e 's|http://localhost:8080/users|http://{server_ip}:8080/users|g' ./*  #Replace {server_ip} with your private/public IP
 ```
 
 4. Build the react-app
@@ -124,8 +124,8 @@ systemctl enable nginx --now
 mysql -u root -p < /var/www/html/UserCRUDApp/php-backend/config/Import.sql
 ```
 
-7. Change the localhost with your react-app ip in the CORS header in php-backend/public/index.php
+7. Change the localhost with your react-app IP in the CORS header in php-backend/public/index.php
 
 8. Change the 'db_password' value with the Mariadb Password {Set during the mysql_secure_installation} in the php-backend/config/config.php
 
-9. Open the WebBrowser and goto http://localhost {#Replace localhost with your private/public IP} for react-app
+9. Open the WebBrowser and goto http://{server_ip} {#Replace {server_ip} with your private/public IP} for react-app
