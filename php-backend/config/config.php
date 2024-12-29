@@ -7,7 +7,7 @@ if(!defined("UserCRUDApp")){
 $config = [
     
     'db_user' => 'root', // Databse Username
-    'db_password' => 'root', // Database Password
+    'db_password' => '', // Database Password
 
     // DB connection params
     'database' => [
