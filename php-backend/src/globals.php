@@ -1,5 +1,9 @@
 <?php
 
+if(!defined("UserCRUDApp")){
+    die("something's fishy");
+}
+
 // App Globals
 
 // Paths

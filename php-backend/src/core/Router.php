@@ -1,5 +1,9 @@
 <?php
 
+if(!defined("UserCRUDApp")){
+    die("something's fishy");
+}
+
 require_once $globals['routes'].'/routes.php';
 
 class Router {

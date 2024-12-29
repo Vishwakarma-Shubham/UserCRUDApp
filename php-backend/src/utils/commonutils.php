@@ -14,7 +14,7 @@ function sanitize_string($sting){
     return addslashes($sting);
 }
 
-function POST($key, $error = "", $default = ''){
+function GetData($key, $error = "", $default = ''){ 
     
     global $errors;
 

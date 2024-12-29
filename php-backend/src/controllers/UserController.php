@@ -1,4 +1,9 @@
 <?php
+
+if(!defined("UserCRUDApp")){
+    die("something's fishy");
+}
+
 require_once $globals['models'].'/User.php';
 
 class UserController {
@@ -16,7 +21,7 @@ class UserController {
         'err_user_update' => 'Failed to update the user',
         'mandatory_fields_missing' => 'User Mandatory fields Missing', 
         'no_name' => 'Please provide Name',
-        'no_emial' => 'Please provide Email Address',
+        'no_email' => 'Please provide Email Address',
         'no_pass' => 'Please provide Password',
         'no_dob' => 'Please provide DOB',
         'err_user_details' => 'Error in user details',
@@ -76,10 +81,10 @@ class UserController {
 
         $new_user = [];
 
-        $new_user['name'] = POST('name', $this->messages['no_name']);
-        $new_user['email'] = POST('email', $this->messages['no_emial']);
-        $new_user['password'] = POST('password', $this->messages['no_pass']);
-        $new_user['dob'] = POST('dob', $this->messages['no_dob']);
+        $new_user['name'] = GetData('name', $this->messages['no_name']);
+        $new_user['email'] = GetData('email', $this->messages['no_email']);
+        $new_user['password'] = GetData('password', $this->messages['no_pass']);
+        $new_user['dob'] = GetData('dob', $this->messages['no_dob']);
 
 
         if(!empty($errors)){
@@ -163,9 +168,9 @@ class UserController {
         
         $update_user = [];
 
-        $update_user['name'] = POST('name', $this->messages['no_name'], $userById['name']);
-        $update_user['email'] = POST('email', $this->messages['no_emial'], $userById['email']);
-        $update_user['dob'] = POST('dob', $this->messages['no_dob'], $userById['dob']);
+        $update_user['name'] = GetData('name', $this->messages['no_name'], $userById['name']);
+        $update_user['email'] = GetData('email', $this->messages['no_email'], $userById['email']);
+        $update_user['dob'] = GetData('dob', $this->messages['no_dob'], $userById['dob']);
 
 
         if (!preg_match('/^[A-Za-z ]+$/', $update_user['name'])) {
@@ -213,7 +218,7 @@ class UserController {
 
         $update_user['password'] = '';
         if(array_key_exists('password', $_POST) && !empty($_POST['password'])){
-            $update_user['password'] = POST('password');
+            $update_user['password'] = GetData('password');
 
             if(strlen($update_user['password']) < 8){
                 API_Response($this->messages['err_user_details'],[], $this->error_messages[10], false);

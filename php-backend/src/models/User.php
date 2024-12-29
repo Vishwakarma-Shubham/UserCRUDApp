@@ -1,5 +1,9 @@
 <?php
 
+if(!defined("UserCRUDApp")){
+    die("something's fishy");
+}
+
 class User {
     private $db;
     private $table = 'users';
